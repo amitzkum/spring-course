@@ -12,10 +12,13 @@ public class FunRestController {
     @Value("${team.name}")
     private String teamName;
 
+    @Value("${coach.experience}")
+    private String yearsExpOfCoah;
+
     // expose "/teaminfo"
     @GetMapping("/teaminfo")
     public String getTeamInfo() {
-        return ("Team " + teamName + "'s coach is " + coachName);
+        return ("Team " + teamName + "'s coach is " + coachName + ". And he has " + yearsExpOfCoah + " years of experience as a coach!");
     }
 
     // expose "/" endpoint to return "Hello World"
