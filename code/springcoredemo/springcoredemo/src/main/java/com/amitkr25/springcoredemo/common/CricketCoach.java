@@ -1,4 +1,4 @@
-package com.amitkr25.springcoredemo;
+package com.amitkr25.springcoredemo.common;
 
 import org.springframework.stereotype.Component;
 
