@@ -124,6 +124,15 @@ Bean Lifecycle Methods(Hooks)
 		- Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, in the case of prototypes, configured destruction lifecycle callbacks are not called. The client code must clean up prototype-scoped objects and release expensive resources that the prototype bean(s) are holding.
 
 Configuring Beans with Java Code
-	- 
+	- Process
+		1. Create `@Configuration` class
+		2. Define `@Bean` method to configure the bean
+		3. Inject the bean into our controller
+	- Used of `@Bean` 
+		- Make an existing third party class available to Spring Framework
+		- You may not have access to source code of the third party class(only jar file)
+			- To use that third party class, import the jar file, and use it as a spring bean
+
+
 
 
