@@ -1,6 +1,6 @@
 package com.amitkr25.springcoredemo.rest;
 
-import com.amitkr25.util.Coach;
+import com.amitkr25.springcoredemo.common.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +10,9 @@ public class DemoController {
     //define a private field for dependencies
     private Coach myCoach;
 
-    //define a constructor for DI
+    // using setter injection instead of Constructor Injection
     @Autowired
-    public DemoController(Coach coach) {
+    public void setCoach(Coach coach) {
         myCoach = coach;
     }
 
