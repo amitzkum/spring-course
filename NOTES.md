@@ -101,4 +101,16 @@ Lazy Initialization `@Lazy`
 		- explicitly requested
 	- Instead of adding `@Lazy` to each class we could use a global lazy config
 		- In applicatin.properties set `spring.main.lazy-initialization=true`
-	
+
+
+Bean Scopes `@Scope` annotation
+	- Default scope is Singleton(Spring container creates only one instance of the bean, it is cached in memory, all refrences will point to same bean)
+	- Explicitly specifying the bean to be singleton using `@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)`
+	- Types of scopes
+		1. singleton
+		2. prototype - new bean instance for each injection request
+		3. request - scoped to a http web request, only used for web apps
+		4. session - scoped to a http web session, only used for web apps
+		5. application - scoped to a web app ServletContext, used only for web apps 
+		6. websocket - scoped for websocket, only used for web apps
+
