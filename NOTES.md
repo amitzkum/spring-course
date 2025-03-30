@@ -55,6 +55,16 @@ Component Scanning
 			// ...
 			```
 
+Setter Injection
+	- inject dependencies by calling setter methods on your class
+	- create a setter method in your class and add `@Autowired` annotation
+	- NOTE: You can inject dependencies by calling ANY method in your class simply by using the `@Autowired` annotation
 
+
+Field Injection -> not recommended by spring.io team
+	- makes code harder to Unit Test
+	- inject dependencies by setting field values directly on your class (even private fields)
+		- accomplished by using Java Reflections
+	- 
 
 		
