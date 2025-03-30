@@ -51,7 +51,6 @@ Component Scanning
 									"org.acme.cart"
 								})
 			public class SpringApplication {}
-
 			// ...
 			```
 
@@ -69,6 +68,7 @@ Field Injection -> not recommended by spring.io team
 Qualifiers
 	- If we have multiple implementations of an interface which one to inject?
 	- Spring will give the following error
+
 		```
 		Parameter 0 of constructor in com.amitkr25.springcoredemo.rest.DemoController required a single bean, but 4 were found:
 			- baseballCoach: defined in file [D:\dev\spring-course\code\springcoredemo\springcoredemo\target\classes\com\amitkr25\springcoredemo\common\BaseballCoach.class]
@@ -76,12 +76,21 @@ Qualifiers
 			- tennisCoach: defined in file [D:\dev\spring-course\code\springcoredemo\springcoredemo\target\classes\com\amitkr25\springcoredemo\common\TennisCoach.class]
 			- trackCoach: defined in file [D:\dev\spring-course\code\springcoredemo\springcoredemo\target\classes\com\amitkr25\springcoredemo\common\TrackCoach.class]
 		```
+
 	- using `@Qualifier("beanID")` beanId whould have the same name as the class except the first character lower case, so for CricketCoach class beanId will be cricketCoach
 	- Use the qualifier where you are injecting, either setter or constructor injection
+
 	- The qualifier should come before the argument
 		- e.g.
 		```java
-
+		// using constructor injection
+	    @Autowired
+	    public DemoController(@Qualifier("baseballCoach") Coach coach) {
+	        myCoach = coach;
+	    }
 		```
 
-		
+	- 	If you have multiple implementations then one of them can me marked default using the `@Primary` annotation. 
+	- Qualifier annotation has higher precedence than Primary
+	- prefer using Qualifier
+
