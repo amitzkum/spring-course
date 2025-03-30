@@ -13,7 +13,8 @@ public class DemoController {
 
     // using constructor injection
     @Autowired
-    public DemoController(Coach coach) {
+    public DemoController(@Qualifier("cricketCoach") Coach coach) {
+        System.out.println("In Constructor of: " + getClass().getSimpleName());
         myCoach = coach;
     }
 

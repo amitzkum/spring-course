@@ -94,3 +94,11 @@ Qualifiers
 	- Qualifier annotation has higher precedence than Primary
 	- prefer using Qualifier
 
+
+Lazy Initialization `@Lazy`
+	- instead of creating all beans upfront, initialize only when 
+		- it is needed for dependency injection
+		- explicitly requested
+	- Instead of adding `@Lazy` to each class we could use a global lazy config
+		- In applicatin.properties set `spring.main.lazy-initialization=true`
+	
