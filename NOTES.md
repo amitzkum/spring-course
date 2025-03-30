@@ -35,4 +35,26 @@ Dependency Injection
 	- NOTE: if you only have one constructor in a class then @Autowired on constructor is optional
 	
 	
+Component Scanning 
+	- `import org.springframework.boot.autoconfigure.SpringBootApplication;` enables Auto Configuration, Component Scanning, and Additional Configuration. 
+	- This is imported in the main Spring Boot App Java file.
+	- `@EnableAutoConfiguration` - enables SBs auto-config support, `@ComponentScan` - enables component scanning in the current and sub-packages, `@Configuration` - registers extra beans with the `@Bean` annotation, or import other configuration classes
+	- Component scanning by default scans only the package of the main Spring Boot App
+		- For other packages if you want component scanning -> Explicitly specifiy the packages to scan in `@SpringBootApplication` annotation
+		- e.g. 
+			```java
+			// ...
+			@SpringBootApplication(
+				scanBasePackages={
+									"com.amitkr25.springcoredemo", 
+									"com.amitkr25.demo", 
+									"org.acme.cart"
+								})
+			public class SpringApplication {}
+
+			// ...
+			```
+
+
+
 		
