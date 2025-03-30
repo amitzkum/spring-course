@@ -12,6 +12,10 @@ Spring Boot apps are self contained, contains server included
 		- Run option 1: `java -jar jarFileName.jar`
 		- Run option 2: `mvnw spring-boot:run`
 	
+
+---
+
+
 Inversion of Control
 	- IoC = approach of outsourcing the construction and management of objects
 	- Spring Container is the Object Factory which returns an object based on a configuration
@@ -134,5 +138,17 @@ Configuring Beans with Java Code
 			- To use that third party class, import the jar file, and use it as a spring bean
 
 
+---
 
 
+Hibernate
+	- Framwork for persisting/saving Java objects in a DB
+	- Benifits
+		1. Handles low level sql
+		2. Minimizes the amount of JDBC code you have to develop
+		3. Provides ORM
+	- ORM = mapping between a java class and a table
+	- JPA = Jakarta Persistence API (aka Java Persistence API)
+		- standard API for ORM
+		- only a specification
+		- defines a set of interfaces which are required to be implemented
