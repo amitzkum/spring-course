@@ -13,28 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     //define a private field for dependencies
     private Coach myCoach;
-    private Coach anotherCoach;
 
     // using constructor injection
     @Autowired
     public DemoController(
-            @Qualifier("cricketCoach") Coach coach,
-            @Qualifier("cricketCoach") Coach anotherCoach) {
+            @Qualifier("cricketCoach") Coach coach) {
         System.out.println("In Constructor of: " + getClass().getSimpleName());
         myCoach = coach;
-        this.anotherCoach = anotherCoach;
     }
 
     @GetMapping("/dailyworkout")
     public String getDailyWorkout() {
         return myCoach.getDailyWorkouts();
-    }
-
-    // check if beans are same or not
-    // singleton true
-    // prototype false
-    @GetMapping("/check")
-    public String check() {
-        return "Comparing beans myCoach == anotherCoach: " + (this.myCoach == this.anotherCoach);
     }
 }

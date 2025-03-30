@@ -114,3 +114,16 @@ Bean Scopes `@Scope` annotation
 		5. application - scoped to a web app ServletContext, used only for web apps 
 		6. websocket - scoped for websocket, only used for web apps
 
+Bean Lifecycle Methods(Hooks)
+	- You can add custom code during bean's lifecycle
+	- `@PostConstruct`
+	- `@PreDestroy`
+	- Special Note about Prototype Scope - Destroy Lifecycle Method
+		- For "prototype" scoped beans, Spring does not call the destroy method. 
+		- In contrast to the other scopes, Spring does not manage the complete lifecycle of a prototype bean: the container instantiates, configures, and otherwise assembles a prototype object, and hands it to the client, with no further record of that prototype instance.
+		- Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, in the case of prototypes, configured destruction lifecycle callbacks are not called. The client code must clean up prototype-scoped objects and release expensive resources that the prototype bean(s) are holding.
+
+Configuring Beans with Java Code
+	- 
+
+
