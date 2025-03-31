@@ -173,3 +173,24 @@ Entity Class
 		- Override the public method, public Serializable generate(...)
 		
 
+Saving Java Object with JPA
+	- Flow: We need a **SudentDao** - responsible for interfacing with the database. DAO needs a JPA Entity Manager. Will have create(), getAll(), save() etc. functions defined to serve our purpose, **EntityManager** - Main component for saving and retrieving entities. Needs a Data Source for connecting to a database. DataSource contains connection information, DataSource
+		- JPA Entity Manager and DataSource are automatically created by Spring Boot, base on information in application.properties files
+		- We need to autowire/inject EntityManager into our Dao
+	- StudentDAO <-> EntityManager <-> DataSource <-> Database
+	- JPA Repository vs Entity Manager
+		- EntityManager Use Cases
+			1. Need low level control over DB Operations and write custom queries
+			2. provide low level access to JPA and work directly with JPA entities
+			3. Working with complex sql queries and stored procedure calls
+			4. when you have complex requirements not easily handled by high-level abstractions
+		- JPA Respository Use Cases
+			1. Provides common CRUD operations out of the box, reducing amount of code you need to write
+			2. Additional features like pagination and sorting
+			3. generate queries based on method names
+			4. Can also create custom queries using @Query 
+		- Both can be used simultaneously in the same project
+	- Working with DAO
+		- Define DAO Iterface -> Define DAO Implementaion(Inject EntityManager) -> Update Main App
+	- `@Transactional` annotation handles transaction management 
+	- `@Repository` is a sub-annotation of the `@Component` annotation -> Use it on Dao Implementation class. Adds support for component scanning, and JDBC exception translation
