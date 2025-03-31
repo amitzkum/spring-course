@@ -152,3 +152,24 @@ Hibernate
 		- standard API for ORM
 		- only a specification
 		- defines a set of interfaces which are required to be implemented
+	- MySql Account: springstudent@springstudent
+	- In spring boot Hibernate is the default implementation for JPA
+		- `EntityManager` is the main component for creating queries
+		- `EntityManager` is from JPA
+
+Entity Class
+	- must be annotated with `@Entity`, must have a public or protected no-argument constructor (can have other constructors)
+	- `@Table` annotation is optional too, if not provided, it has the same name as the class name, provide it for good coding practise
+	- `@Column` is optional, if not provided it is the same name as the variable name, but good to write it, always write it
+	- To get the primary key + auto increment feature, use the annotation, `@Id` followed by `@GeneratedValue(stratergy=GenerationType.IDENTITY)`
+	- ID generation stratergies
+		- GenerationType.AUTO
+		- GenerationType.IDENTITY
+		- GenerationType.SEQUENCE
+		- GenerationType.TABLE
+		- GenerationType.UUID
+	- To create custom generation stratergy
+		- create implementation of org.hibernate.id.IdentifierGenerator
+		- Override the public method, public Serializable generate(...)
+		
+
