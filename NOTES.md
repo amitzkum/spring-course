@@ -211,4 +211,8 @@ Querying multiple values
 	- JPA QL Named Params -> prefixed with a **:**
 	- For strict JPAQL `SELECT` clause is required
 		- e.g. `TypedQuery<Student> theQuery = entityManager.createQuery("SELECT s FROM Student s WHERE s.email LIKE 'google.com'", Student.class);`
-	
+
+Updating an Object
+	- Flow: find the object using `entityManager.find()` -> use the setter method for updating -> Update using `entityManager.merge()`
+	- To update last name for all students
+		- e.g. `int rowsUpdated = entityManager.createQuery("UPDATE Student SET lastName='Tester'").executeUpdate();`
