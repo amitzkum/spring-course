@@ -11,4 +11,6 @@ public interface StudentDAO {
     Student findById(Integer id);
 
     List<Student> finaAll();
+
+    List<Student> findByLastName(String theLastName);
 }
