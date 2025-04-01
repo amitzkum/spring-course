@@ -29,8 +29,9 @@ public class CruddemoApplication {
 			queryForStudentsByLastName(studentDAO);
 			updateStudent(studentDAO);
 			deleteStudent(studentDAO);
-			*/
 			deleteAllStudents(studentDAO);
+			*/
+			createMultipleStudents(studentDAO);
 		};
 	}
 

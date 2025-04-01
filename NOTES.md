@@ -231,3 +231,13 @@ Creating Database using Java Code
 	- add this to application.properties, `spring.jpa.hibernate.dll-auto=PROPERTY_VALUE`
 		- base on PROPERTY_VALUE different things will happen
 		- possible values: `none`, `create`, `create-drop`, `validate`, `update`
+	- `create` used in the demo
+		- database tables are dropped first and then recreated from scratch
+	- adding loggin config to log sql statements
+		- in application.properties: 
+			```java
+			logging.level.org.hibernate.SQL=debug
+			logging.level.org.hibernate.orm.jdbc.bind=trace
+			```
+	- 
+
