@@ -13,9 +13,9 @@ import java.util.List;
 public class StudentDAOImpl implements StudentDAO{
 
     //define fields for entity manager
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    //inject entity manager using contructor injection
+    //inject entity manager using constructor injection
     @Autowired
     public StudentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -58,5 +58,18 @@ public class StudentDAOImpl implements StudentDAO{
     @Transactional
     public void update(Student theStudent) {
         entityManager.merge(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Student theStudent = entityManager.find(Student.class, id);
+        entityManager.remove(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        return entityManager.createQuery("DELETE FROM Student").executeUpdate();
     }
 }

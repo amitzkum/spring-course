@@ -216,3 +216,18 @@ Updating an Object
 	- Flow: find the object using `entityManager.find()` -> use the setter method for updating -> Update using `entityManager.merge()`
 	- To update last name for all students
 		- e.g. `int rowsUpdated = entityManager.createQuery("UPDATE Student SET lastName='Tester'").executeUpdate();`
+
+
+Deleting an Object
+	- Flow: find the object -> use `entityManager.remove()`
+	- To delete multiple students based on a condition
+		- e.g. `int rowsDeleted = entityManager.createQuery("DELETE FROM Student WHERE lastName='Smith'").executeUpdate();`
+	- Delete all the students
+		- e.g. `int rowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();`
+
+
+Creating Database using Java Code
+	- Java Code -> JPA/Hibernate -> Generates required SQL -> DB
+	- add this to application.properties, `spring.jpa.hibernate.dll-auto=PROPERTY_VALUE`
+		- base on PROPERTY_VALUE different things will happen
+		- possible values: `none`, `create`, `create-drop`, `validate`, `update`
