@@ -194,3 +194,14 @@ Saving Java Object with JPA
 		- Define DAO Iterface -> Define DAO Implementaion(Inject EntityManager) -> Update Main App
 	- `@Transactional` annotation handles transaction management 
 	- `@Repository` is a sub-annotation of the `@Component` annotation -> Use it on Dao Implementation class. Adds support for component scanning, and JDBC exception translation
+
+Change the starting point of AUTO_INCREMENT
+	- `ALTER TABLE student_tracker.student AUTO_INCREMENT=3000;`
+	- Reset auto increment value to 1 
+		`TRUNCATE student_tracker.student;` -> **will remove all data** and reset auto_increment to 1
+	
+
+Reading Value From DB
+	- Flow: Update Dao Interface by adding a new method -> Implement the method in the Dao Implementation class 
+	- No need for `@Transactional` since we are not updating/adding data to the database, we are just doing a query
+	- 

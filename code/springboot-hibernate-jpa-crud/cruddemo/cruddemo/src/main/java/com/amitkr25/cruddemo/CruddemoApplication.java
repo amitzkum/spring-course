@@ -1,5 +1,6 @@
 package com.amitkr25.cruddemo;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.amitkr25.cruddemo.dao.StudentDAO;
 import com.amitkr25.cruddemo.entity.Student;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,9 +19,32 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(@Qualifier("studentDAOImpl") StudentDAO studentDAO) {
 		return runner -> {
+/*
 			createStudent(studentDAO);
 			createMultipleStudents(studentDAO);
+*/
+            readStudent(studentDAO);
 		};
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+		// create a new student object
+		System.out.println("Creating student object...");
+		Student student = new Student("John", "Doe", "john.doe@google.com");
+
+		// add it to DB
+		System.out.println("Saving student object to database...");
+		studentDAO.save(student);
+		System.out.println("Displaying the ID of the saved student...\nGenerated ID: "+student.getId());
+
+		// retrieve the created student
+		Integer id = student.getId();
+		Student fromDb = studentDAO.findById(id);
+
+		// display
+		if (fromDb != null) {
+			System.out.println("Student Information\nID: "+fromDb.getId()+"\nName: "+fromDb.getFirstName()+" "+fromDb.getLastName());
+		}
 	}
 
 	private void createMultipleStudents(StudentDAO studentDAO) {
