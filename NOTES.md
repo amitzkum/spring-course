@@ -204,4 +204,11 @@ Change the starting point of AUTO_INCREMENT
 Reading Value From DB
 	- Flow: Update Dao Interface by adding a new method -> Implement the method in the Dao Implementation class 
 	- No need for `@Transactional` since we are not updating/adding data to the database, we are just doing a query
-	- 
+
+Querying multiple values
+	- using JPA Query Language'
+	- All JPA query are based on Entity names and Entity fields(java objects) not the database table names and fields
+	- JPA QL Named Params -> prefixed with a **:**
+	- For strict JPAQL `SELECT` clause is required
+		- e.g. `TypedQuery<Student> theQuery = entityManager.createQuery("SELECT s FROM Student s WHERE s.email LIKE 'google.com'", Student.class);`
+	
