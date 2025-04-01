@@ -12,6 +12,10 @@ Spring Boot apps are self contained, contains server included
 		- Run option 1: `java -jar jarFileName.jar`
 		- Run option 2: `mvnw spring-boot:run`
 	
+
+---
+
+
 Inversion of Control
 	- IoC = approach of outsourcing the construction and management of objects
 	- Spring Container is the Object Factory which returns an object based on a configuration
@@ -134,5 +138,106 @@ Configuring Beans with Java Code
 			- To use that third party class, import the jar file, and use it as a spring bean
 
 
+---
 
+
+Hibernate
+	- Framwork for persisting/saving Java objects in a DB
+	- Benifits
+		1. Handles low level sql
+		2. Minimizes the amount of JDBC code you have to develop
+		3. Provides ORM
+	- ORM = mapping between a java class and a table
+	- JPA = Jakarta Persistence API (aka Java Persistence API)
+		- standard API for ORM
+		- only a specification
+		- defines a set of interfaces which are required to be implemented
+	- MySql Account: springstudent@springstudent
+	- In spring boot Hibernate is the default implementation for JPA
+		- `EntityManager` is the main component for creating queries
+		- `EntityManager` is from JPA
+
+Entity Class
+	- must be annotated with `@Entity`, must have a public or protected no-argument constructor (can have other constructors)
+	- `@Table` annotation is optional too, if not provided, it has the same name as the class name, provide it for good coding practise
+	- `@Column` is optional, if not provided it is the same name as the variable name, but good to write it, always write it
+	- To get the primary key + auto increment feature, use the annotation, `@Id` followed by `@GeneratedValue(stratergy=GenerationType.IDENTITY)`
+	- ID generation stratergies
+		- GenerationType.AUTO
+		- GenerationType.IDENTITY
+		- GenerationType.SEQUENCE
+		- GenerationType.TABLE
+		- GenerationType.UUID
+	- To create custom generation stratergy
+		- create implementation of org.hibernate.id.IdentifierGenerator
+		- Override the public method, public Serializable generate(...)
+		
+
+Saving Java Object with JPA
+	- Flow: We need a **SudentDao** - responsible for interfacing with the database. DAO needs a JPA Entity Manager. Will have create(), getAll(), save() etc. functions defined to serve our purpose, **EntityManager** - Main component for saving and retrieving entities. Needs a Data Source for connecting to a database. DataSource contains connection information, DataSource
+		- JPA Entity Manager and DataSource are automatically created by Spring Boot, base on information in application.properties files
+		- We need to autowire/inject EntityManager into our Dao
+	- StudentDAO <-> EntityManager <-> DataSource <-> Database
+	- JPA Repository vs Entity Manager
+		- EntityManager Use Cases
+			1. Need low level control over DB Operations and write custom queries
+			2. provide low level access to JPA and work directly with JPA entities
+			3. Working with complex sql queries and stored procedure calls
+			4. when you have complex requirements not easily handled by high-level abstractions
+		- JPA Respository Use Cases
+			1. Provides common CRUD operations out of the box, reducing amount of code you need to write
+			2. Additional features like pagination and sorting
+			3. generate queries based on method names
+			4. Can also create custom queries using @Query 
+		- Both can be used simultaneously in the same project
+	- Working with DAO
+		- Define DAO Iterface -> Define DAO Implementaion(Inject EntityManager) -> Update Main App
+	- `@Transactional` annotation handles transaction management 
+	- `@Repository` is a sub-annotation of the `@Component` annotation -> Use it on Dao Implementation class. Adds support for component scanning, and JDBC exception translation
+
+Change the starting point of AUTO_INCREMENT
+	- `ALTER TABLE student_tracker.student AUTO_INCREMENT=3000;`
+	- Reset auto increment value to 1 
+		`TRUNCATE student_tracker.student;` -> **will remove all data** and reset auto_increment to 1
+	
+
+Reading Value From DB
+	- Flow: Update Dao Interface by adding a new method -> Implement the method in the Dao Implementation class 
+	- No need for `@Transactional` since we are not updating/adding data to the database, we are just doing a query
+
+Querying multiple values
+	- using JPA Query Language'
+	- All JPA query are based on Entity names and Entity fields(java objects) not the database table names and fields
+	- JPA QL Named Params -> prefixed with a **:**
+	- For strict JPAQL `SELECT` clause is required
+		- e.g. `TypedQuery<Student> theQuery = entityManager.createQuery("SELECT s FROM Student s WHERE s.email LIKE 'google.com'", Student.class);`
+
+Updating an Object
+	- Flow: find the object using `entityManager.find()` -> use the setter method for updating -> Update using `entityManager.merge()`
+	- To update last name for all students
+		- e.g. `int rowsUpdated = entityManager.createQuery("UPDATE Student SET lastName='Tester'").executeUpdate();`
+
+
+Deleting an Object
+	- Flow: find the object -> use `entityManager.remove()`
+	- To delete multiple students based on a condition
+		- e.g. `int rowsDeleted = entityManager.createQuery("DELETE FROM Student WHERE lastName='Smith'").executeUpdate();`
+	- Delete all the students
+		- e.g. `int rowsDeleted = entityManager.createQuery("DELETE FROM Student").executeUpdate();`
+
+
+Creating Database using Java Code
+	- Java Code -> JPA/Hibernate -> Generates required SQL -> DB
+	- add this to application.properties, `spring.jpa.hibernate.dll-auto=PROPERTY_VALUE`
+		- base on PROPERTY_VALUE different things will happen
+		- possible values: `none`, `create`, `create-drop`, `validate`, `update`
+	- `create` used in the demo
+		- database tables are dropped first and then recreated from scratch
+	- adding loggin config to log sql statements
+		- in application.properties: 
+			```java
+			logging.level.org.hibernate.SQL=debug
+			logging.level.org.hibernate.orm.jdbc.bind=trace
+			```
+	- 
 
